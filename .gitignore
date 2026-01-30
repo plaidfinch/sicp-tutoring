@@ -1,6 +1,7 @@
 # Instance-specific data (created by setup.sh)
 .tutor/
 work/
+.setup-markers/
 
 # Book content - ignore everything except the submodule
 # book/sicp-source/ is a git submodule (tracked via .gitmodules)

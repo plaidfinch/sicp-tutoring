@@ -3,7 +3,21 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
+# Parse arguments
+REPAIR_MODE=false
+for arg in "$@"; do
+    case $arg in
+        --repair)
+            REPAIR_MODE=true
+            shift
+            ;;
+    esac
+done
+
 echo "=== SICP Tutoring Setup ==="
+if $REPAIR_MODE; then
+    echo "(Repair mode: re-checking all phases)"
+fi
 
 # === Dependency Check (early exit if missing) ===
 MISSING_DEPS=()
@@ -24,38 +38,64 @@ fi
 # === All dependencies present, proceed with setup ===
 
 # Check/install SICP Racket package
-if racket -e '(require sicp)' 2>/dev/null; then
+RACKET_MARKER="$PROJECT_DIR/.setup-markers/racket-sicp"
+if [ -f "$RACKET_MARKER" ] && ! $REPAIR_MODE; then
+    echo "✓ SICP package installed"
+elif racket -e '(require sicp)' 2>/dev/null; then
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$RACKET_MARKER"
     echo "✓ SICP package installed"
 else
     echo "Installing SICP package..."
     raco pkg install sicp
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$RACKET_MARKER"
 fi
 
 # Initialize submodule
-if [ ! -f "$PROJECT_DIR/book/sicp-source/html/index.xhtml" ]; then
+SUBMODULE_MARKER="$PROJECT_DIR/.setup-markers/submodule"
+if [ -f "$SUBMODULE_MARKER" ] && ! $REPAIR_MODE; then
+    echo "✓ Book submodule present"
+elif [ -f "$PROJECT_DIR/book/sicp-source/html/index.xhtml" ]; then
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$SUBMODULE_MARKER"
+    echo "✓ Book submodule present"
+else
     echo "Initializing SICP book submodule..."
     git -C "$PROJECT_DIR" submodule update --init --depth 1 book/sicp-source
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$SUBMODULE_MARKER"
     echo "✓ Book submodule initialized"
-else
-    echo "✓ Book submodule present"
 fi
 
 # Process to markdown (one-time, requires pandoc)
-PROCESSED_MARKER="$PROJECT_DIR/book/text/.processed"
-if [ ! -f "$PROCESSED_MARKER" ]; then
+PROCESSED_MARKER="$PROJECT_DIR/.setup-markers/book-processed"
+if [ -f "$PROCESSED_MARKER" ] && ! $REPAIR_MODE; then
+    echo "✓ Book already processed"
+elif [ -d "$PROJECT_DIR/book/text" ] && [ -n "$(ls -A "$PROJECT_DIR/book/text" 2>/dev/null)" ]; then
+    # Content exists but marker doesn't—fix the marker
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$PROCESSED_MARKER"
+    echo "✓ Book already processed"
+else
     echo "Processing book to markdown..."
     "$PROJECT_DIR/scripts/process-book.sh"
-    mkdir -p "$PROJECT_DIR/book/text"
+    mkdir -p "$PROJECT_DIR/.setup-markers"
     touch "$PROCESSED_MARKER"
     touch "$PROJECT_DIR/.tutor-verify-book"
     echo "✓ Book processed to markdown"
-else
-    echo "✓ Book already processed"
 fi
 
 # Fetch problem sets and code from MIT (not in sarabander repo)
-MIT_MARKER="$PROJECT_DIR/book/.mit-fetched"
-if [ ! -f "$MIT_MARKER" ]; then
+MIT_MARKER="$PROJECT_DIR/.setup-markers/mit-fetched"
+if [ -f "$MIT_MARKER" ] && ! $REPAIR_MODE; then
+    echo "✓ Problem sets and code present"
+elif [ -d "$PROJECT_DIR/book/psets" ] && [ -d "$PROJECT_DIR/book/code" ]; then
+    # Content exists but marker doesn't—fix the marker
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$MIT_MARKER"
+    echo "✓ Problem sets and code present"
+else
     echo "Fetching problem sets and code from MIT..."
     mkdir -p "$PROJECT_DIR/book"
     curl -sL -o /tmp/sicp.zip \
@@ -68,14 +108,18 @@ if [ ! -f "$MIT_MARKER" ]; then
         mkdir -p "$PROJECT_DIR/book/code/extracted"
         unzip -o -q "$PROJECT_DIR/book/code/allcode.zip" -d "$PROJECT_DIR/book/code/extracted/"
     fi
+    mkdir -p "$PROJECT_DIR/.setup-markers"
     touch "$MIT_MARKER"
     echo "✓ Problem sets and code fetched"
-else
-    echo "✓ Problem sets and code present"
 fi
 
 # Initialize tutor workspace (.tutor/)
-if [ -d "$PROJECT_DIR/.tutor/.git" ]; then
+TUTOR_MARKER="$PROJECT_DIR/.setup-markers/tutor-workspace"
+if [ -f "$TUTOR_MARKER" ] && ! $REPAIR_MODE; then
+    echo "✓ .tutor/ git initialized"
+elif [ -d "$PROJECT_DIR/.tutor/.git" ]; then
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$TUTOR_MARKER"
     echo "✓ .tutor/ git initialized"
 else
     echo "Initializing tutor workspace..."
@@ -140,16 +184,25 @@ Track patterns of confusion that recur across sessions.
 STRUGEOF
 
     cd "$PROJECT_DIR/.tutor" && git init && git add -A && git commit -m "Initial tutor workspace"
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$TUTOR_MARKER"
     echo "✓ .tutor/ git initialized"
 fi
 
 # Initialize student workspace (work/)
+WORK_MARKER="$PROJECT_DIR/.setup-markers/work-workspace"
 mkdir -p "$PROJECT_DIR/work"
-if [ -d "$PROJECT_DIR/work/.git" ]; then
+if [ -f "$WORK_MARKER" ] && ! $REPAIR_MODE; then
+    echo "✓ work/ git initialized"
+elif [ -d "$PROJECT_DIR/work/.git" ]; then
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$WORK_MARKER"
     echo "✓ work/ git initialized"
 else
     touch "$PROJECT_DIR/work/.gitkeep"
     cd "$PROJECT_DIR/work" && git init && git add -A && git commit -m "Initial setup"
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$WORK_MARKER"
     echo "✓ work/ git initialized"
 fi
 
