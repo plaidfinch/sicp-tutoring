@@ -9,9 +9,10 @@ A Claude Code skill for tutoring through *Structure and Interpretation of Comput
    ```bash
    ./scripts/setup.sh
    ```
-3. **Open in Claude Code** and start learning!
+3. **Open Claude Code** and start learning!
 
 The setup script handles:
+
 - Installing the SICP language package
 - Fetching the complete book from MIT
 - Initializing git repos
@@ -23,10 +24,5 @@ The setup script handles:
 - `book/` — SICP book resources (auto-fetched)
 - `work/` — Your code (git repo)
 
-## Using DrRacket
-
-DrRacket is your primary environment for writing code:
-1. Start each file with `#lang sicp`
-2. Use the stepper (Debug → Step) to trace evaluation
-
-See the SICP skill for full tutoring methodology.
+You should do all your work in `work/`, so Claude can see what you're doing. Claude is instructed
+to never write your code for you, only to act as a teaching assistant.
