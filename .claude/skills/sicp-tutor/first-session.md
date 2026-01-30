@@ -28,8 +28,8 @@ The session startup already greeted them and explained setup is happening. Now v
 5. **If something is wrong:**
    - Inform the user what's missing or corrupted
    - For submodule issues: `git submodule update --init book/sicp-source`
-   - For markdown issues: `rm book/text/.processed` then `./scripts/setup.sh`
-   - For MIT content: `rm book/.mit-fetched` then `./scripts/setup.sh`
+   - For markdown issues: `rm .setup-markers/book-processed` then `./scripts/setup.sh`
+   - For MIT content: `rm .setup-markers/mit-fetched` then `./scripts/setup.sh`
 
 ## 2. Welcome Interview
 
