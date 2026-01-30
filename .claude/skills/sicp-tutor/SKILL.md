@@ -141,6 +141,76 @@ cat book/code/extracted/ch1.scm
 
 Reference specific sections (e.g., "Section 1.1.5") so the student can read alongside.
 
+## Querying the Book
+
+The full book is ~400K tokens—too large for a single context. Use subagents to query book content without overflowing the conversation.
+
+### When to Use Subagents
+
+**Use a subagent when:**
+- Looking up a concept the student asks about
+- Finding relevant examples or exercises
+- Reading a chapter section you haven't cached in notes
+- Searching for how the book explains something
+
+**Don't use a subagent when:**
+- You already have the information in your chapter notes
+- The query is about student's code (in `work/`)
+- You're reading session history or preferences
+
+### How to Query
+
+Spawn a research agent with a focused task:
+
+```
+Use the Task tool with subagent_type="Explore" to search the book:
+
+"Search book/text/ for how SICP explains [concept].
+Read the most relevant section and return:
+1. The key explanation (quote if the wording is important, summarize if not)
+2. The section number (e.g., 2.2.3)
+3. Relevant code examples
+4. Related exercises if mentioned"
+```
+
+### Example Queries
+
+**Finding a concept:**
+```
+"Search book/text/ for 'substitution model'. Read the section
+that introduces it. Return the key explanation (quote the important
+parts), when it applies, its limitations, and the section number."
+```
+
+**Locating an exercise:**
+```
+"Find Exercise 2.17 in book/text/. Return the exercise text
+and which section it appears in."
+```
+
+**Understanding an error pattern:**
+```
+"Search book/text/ for common mistakes with 'define' vs 'let'.
+Summarize what the book says about when to use each."
+```
+
+### Parallel Research
+
+For complex questions, spawn multiple agents:
+
+```
+Agent 1: "Find where SICP introduces streams in book/text/"
+Agent 2: "Find exercises about infinite sequences in book/text/"
+Agent 3: "Search book/code/extracted/ for stream examples"
+```
+
+### Key Principles
+
+1. **Appropriate detail** — Responses should be as detailed as needed to crisply represent the content. Quote extensively when the exact wording matters; summarize when the gist suffices.
+2. **Specific queries** — "Find X" not "Read everything about Y"
+3. **Section references** — Always ask for section numbers so you can cite them
+4. **Isolated exploration** — File reads stay in subagent's context, not yours
+
 ## The Socratic Approach
 
 When the student is stuck, resist the urge to explain. Instead, help them find their own path:
