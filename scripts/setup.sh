@@ -24,16 +24,30 @@ if command -v racket &>/dev/null; then
 fi
 
 # Fetch book
-if [ -d "$PROJECT_DIR/book/full-text" ]; then
+# Use a marker file to track successful completion, not just directory existence
+BOOK_COMPLETE_MARKER="$PROJECT_DIR/book/.fetch-complete"
+if [ -f "$BOOK_COMPLETE_MARKER" ]; then
     echo "✓ Book already fetched"
 else
     echo "Fetching SICP book from MIT..."
-    curl -L -o /tmp/sicp.zip \
-        "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip"
-    unzip -q /tmp/sicp.zip -d "$PROJECT_DIR/book/"
+    # Clean up any partial previous attempts
+    rm -rf "$PROJECT_DIR/book/full-text" "$PROJECT_DIR/book/code"
+    mkdir -p "$PROJECT_DIR/book"
+
+    curl -L --progress-bar -o /tmp/sicp.zip \
+        "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip" 2>&1
+    unzip -o -q /tmp/sicp.zip -d "$PROJECT_DIR/book/"
     rm /tmp/sicp.zip
-    [ -f "$PROJECT_DIR/book/code/allcode/allcode.zip" ] && \
-        unzip -q "$PROJECT_DIR/book/code/allcode/allcode.zip" -d "$PROJECT_DIR/book/code/extracted/"
+
+    if [ -f "$PROJECT_DIR/book/code/allcode.zip" ]; then
+        mkdir -p "$PROJECT_DIR/book/code/extracted"
+        unzip -o -q "$PROJECT_DIR/book/code/allcode.zip" -d "$PROJECT_DIR/book/code/extracted/"
+    fi
+
+    # Mark as complete only after all steps succeed
+    touch "$BOOK_COMPLETE_MARKER"
+    # Signal tutor to verify contents on first session
+    touch "$PROJECT_DIR/.tutor-verify-book"
     echo "✓ Book fetched"
 fi
 
@@ -107,9 +121,11 @@ STRUGEOF
 fi
 
 # Initialize student workspace (work/)
+mkdir -p "$PROJECT_DIR/work"
 if [ -d "$PROJECT_DIR/work/.git" ]; then
     echo "✓ work/ git initialized"
 else
+    touch "$PROJECT_DIR/work/.gitkeep"
     cd "$PROJECT_DIR/work" && git init && git add -A && git commit -m "Initial setup"
     echo "✓ work/ git initialized"
 fi
