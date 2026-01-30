@@ -27,7 +27,7 @@
       "Bash(git -C .tutor log:*)",
       "Bash(git -C .tutor diff:*)",
       "Bash(mkdir -p .tutor:*)",
-      "Bash(rm .tutor-verify-book)",
+      "Bash(rm .setup-markers/tutor-verify-book)",
       "Bash(rm book/text/.processed)",
       "Bash(rm book/.mit-fetched)",
       "Bash(git submodule update:*)",

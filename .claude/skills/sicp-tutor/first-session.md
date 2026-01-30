@@ -4,7 +4,7 @@
 
 ## 1. Verify Book Installation (if needed)
 
-The session startup already greeted them and explained setup is happening. Now verify the book if `.tutor-verify-book` exists:
+The session startup already greeted them and explained setup is happening. Now verify the book if `.setup-markers/tutor-verify-book` exists:
 
 1. **Examine the book directory structure:**
    ```bash
@@ -22,7 +22,7 @@ The session startup already greeted them and explained setup is happening. Now v
 3. **Spot-check content** by reading a small portion of Chapter 1 markdown to confirm it's the actual SICP text (not an error page or corrupted conversion).
 
 4. **If everything looks good:**
-   - Delete the marker: `rm .tutor-verify-book`
+   - Delete the marker: `rm .setup-markers/tutor-verify-book`
    - Proceed to the welcome interview
 
 5. **If something is wrong:**

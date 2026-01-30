@@ -309,3 +309,7 @@ If `./scripts/setup.sh` exits with "MISSING_DEPENDENCIES:", install them using t
 If setup seems partially broken, run `./scripts/setup.sh --repair`.
 
 Check whether DrRacket is installed and prompt installation if needed.
+
+## Command Execution
+
+Only certain relative paths are whitelisted for automatic execution. Always use relative paths (e.g., `./scripts/setup.sh`, `racket -l sicp work/...`) rather than absolute paths to avoid unnecessary permission prompts. Never expand relative paths to absolute ones when running commands.

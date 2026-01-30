@@ -82,7 +82,7 @@ else
     "$PROJECT_DIR/scripts/process-book.sh"
     mkdir -p "$PROJECT_DIR/.setup-markers"
     touch "$PROCESSED_MARKER"
-    touch "$PROJECT_DIR/.tutor-verify-book"
+    touch "$PROJECT_DIR/.setup-markers/tutor-verify-book"
     echo "✓ Book processed to markdown"
 fi
 

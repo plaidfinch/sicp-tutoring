@@ -201,11 +201,6 @@ else
     echo "    No .setup-markers/ found"
 fi
 
-# Remove any tutor verification marker
-if [[ -f .tutor-verify-book ]]; then
-    rm -f .tutor-verify-book
-    echo "    Removed .tutor-verify-book"
-fi
 
 # =============================================================================
 # Done
