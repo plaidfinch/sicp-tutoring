@@ -50,9 +50,10 @@ After gathering information, dispatch a **background sub-agent** to set up the k
 
 ```
 Task tool with run_in_background: true
-subagent_type: general-purpose
+subagent_type: tutor-notes
+description: "Setting up your profile..."
 prompt: |
-  Initialize the SICP tutor knowledge base for a new student:
+  Initialize the knowledge base for a new student:
 
   Student name: [name]
   Background: [what they shared about prior experience]
@@ -63,7 +64,7 @@ prompt: |
   - .tutor/knowledge/preferences.md: Replace placeholder with student identity and observations
   - .tutor/knowledge/progress.json: Set last_session to today's date, total_sessions to 1
 
-  Then commit: git -C .tutor add -A && git -C .tutor commit -m "First session: met [name]"
+  Commit message: "First session: met [name]"
 ```
 
 Then proceed to normal session startup (reading chapter notes, etc.).

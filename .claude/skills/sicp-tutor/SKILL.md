@@ -197,9 +197,10 @@ Delegate all knowledge updates to a **background sub-agent** so the student does
 
 ```
 Task tool with run_in_background: true
-subagent_type: general-purpose
+subagent_type: tutor-notes
+description: "Taking notes..."
 prompt: |
-  Update the SICP tutor knowledge base with the following observations from this session:
+  Update the knowledge base with these session observations:
 
   [Your notes here - what happened, breakthroughs, struggles, preferences observed]
 
@@ -209,7 +210,7 @@ prompt: |
   - .tutor/knowledge/preferences.md (if new preferences observed)
   - .tutor/knowledge/struggles.md (if recurring patterns noticed)
 
-  After updating, commit: git -C .tutor add -A && git -C .tutor commit -m "Session notes: [brief description]"
+  Commit message: "Session notes: [brief description]"
 ```
 
 **Git discipline:** Every knowledge update must be committed.
