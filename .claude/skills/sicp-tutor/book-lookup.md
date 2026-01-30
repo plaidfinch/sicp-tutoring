@@ -4,20 +4,20 @@ How to consult SICP text effectively. The full book is ~400K tokens—choose the
 
 ## Quick Lookups (Direct)
 
-For fast, targeted searches, use grep and direct reads:
+For fast, targeted searches, use the Grep and Read tools:
 
-```bash
+```
 # Search for specific terms
-grep -ri "substitution model" book/text/
-grep -ri "closure" book/text/
+Grep(pattern="substitution model", path="book/text/", "-i"=true)
+Grep(pattern="closure", path="book/text/", "-i"=true)
 
 # Read specific sections (markdown, token-efficient)
-cat book/text/Chapter-1.md
-cat book/text/1_002e1.md      # Section 1.1
-cat book/text/1_002e2.md      # Section 1.2
+Read("book/text/Chapter-1.md")
+Read("book/text/1_002e1.md")      # Section 1.1
+Read("book/text/1_002e2.md")      # Section 1.2
 
 # Find book code
-cat book/code/extracted/ch1.scm
+Read("book/code/extracted/ch1.scm")
 ```
 
 **Use quick lookups when:**
@@ -33,13 +33,13 @@ Tab-separated reference files (item → location):
 - `book/text/exercises.tsv` — exercise → file (e.g., `1.11	1_002e2`)
 - `book/text/figures.tsv` — figure → file (e.g., `2.5	2_002e2`)
 
-```bash
+```
 # Find which section covers a term
-grep "substitution" book/text/term-index.tsv
+Grep(pattern="substitution", path="book/text/term-index.tsv")
 # → substitution model	1.1.5
 
 # Find which file contains an exercise
-grep "1.11" book/text/exercises.tsv
+Grep(pattern="1.11", path="book/text/exercises.tsv")
 # → 1.11	1_002e2
 ```
 
@@ -79,7 +79,7 @@ Read the most relevant section and return:
 3. Subagent returns Section 2.1.1 content with the "building blocks" explanation
 4. You use this to guide discussion: "The book introduces this in Section 2.1.1—have you read that? It makes an interesting point about..."
 
-**Contrast with quick lookup:** If the student just asked "which section covers cons?", use `grep -ri "cons" book/text/` directly.
+**Contrast with quick lookup:** If the student just asked "which section covers cons?", use `Grep(pattern="cons", path="book/text/")` directly.
 
 ## Parallel Research
 

@@ -6,12 +6,10 @@
 
 The session startup already greeted them and explained setup is happening. Now verify the book if `.setup-markers/tutor-verify-book` exists:
 
-1. **Examine the book directory structure:**
-   ```bash
-   ls -la book/
-   ls -la book/sicp-source/html/ | head -10
-   ls book/text/ | head -20
-   ```
+1. **Examine the book directory structure** using the Glob tool:
+   - `Glob(pattern="book/*")` — top-level book structure
+   - `Glob(pattern="book/sicp-source/html/*.xhtml")` — source XHTML files
+   - `Glob(pattern="book/text/*.md")` — processed markdown files
 
 2. **Verify key files exist:**
    - `book/sicp-source/html/index.xhtml` (source XHTML)
@@ -19,17 +17,15 @@ The session startup already greeted them and explained setup is happening. Now v
    - `book/code/extracted/` directory with .scm source files (e.g., ch1.scm)
    - `book/psets/` directory with problem sets
 
-3. **Spot-check content** by reading a small portion of Chapter 1 markdown to confirm it's the actual SICP text (not an error page or corrupted conversion).
+3. **Spot-check content** using Read on a portion of Chapter 1 markdown to confirm it's the actual SICP text.
 
 4. **If everything looks good:**
-   - Delete the marker: `rm .setup-markers/tutor-verify-book`
+   - Delete the marker: `rm .setup-markers/tutor-verify-book` (whitelisted)
    - Proceed to the welcome interview
 
 5. **If something is wrong:**
    - Inform the user what's missing or corrupted
-   - For submodule issues: `git submodule update --init book/sicp-source`
-   - For markdown issues: `rm .setup-markers/book-processed` then `./scripts/setup.sh`
-   - For MIT content: `rm .setup-markers/mit-fetched` then `./scripts/setup.sh`
+   - Run `./scripts/setup.sh --repair` (whitelisted) to fix most issues
 
 ## 2. Welcome Interview
 
