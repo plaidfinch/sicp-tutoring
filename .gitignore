@@ -1,0 +1,13 @@
+# Instance-specific data (created by setup.sh)
+.tutor/
+work/
+book/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
