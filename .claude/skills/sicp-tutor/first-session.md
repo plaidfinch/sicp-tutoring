@@ -9,18 +9,17 @@ If the file `.tutor-verify-book` exists in the project root, the book was just i
 1. **Examine the book directory structure:**
    ```bash
    ls -la book/
-   ls -la book/full-text/
-   ls book/full-text/book/ | head -20
+   ls -la book/sicp-source/html/ | head -10
+   ls book/text/ | head -20
    ```
 
 2. **Verify key files exist:**
-   - `book/full-text/book/book.html` (main entry point)
-   - `book/full-text/book/book-Z-H-10.html` (Chapter 1 content)
-   - `book/full-text/book/book-Z-H-15.html` (Chapter 2 content)
+   - `book/sicp-source/html/index.xhtml` (source XHTML)
+   - `book/text/` directory with processed markdown files (e.g., `1_002e1.md`)
    - `book/code/extracted/` directory with .scm source files (e.g., ch1.scm)
    - `book/psets/` directory with problem sets
 
-3. **Spot-check content** by reading a small portion of Chapter 1 to confirm it's the actual SICP text (not an error page or corrupted download).
+3. **Spot-check content** by reading a small portion of Chapter 1 markdown to confirm it's the actual SICP text (not an error page or corrupted conversion).
 
 4. **If everything looks good:**
    - Delete the marker: `rm .tutor-verify-book`
@@ -28,7 +27,9 @@ If the file `.tutor-verify-book` exists in the project root, the book was just i
 
 5. **If something is wrong:**
    - Inform the user what's missing or corrupted
-   - Suggest running: `rm book/.fetch-complete && ./scripts/setup.sh`
+   - For submodule issues: `git submodule update --init book/sicp-source`
+   - For markdown issues: `rm book/text/.processed && ./scripts/setup.sh`
+   - For MIT content: `rm book/.mit-fetched && ./scripts/setup.sh`
 
 ## Welcome the Student
 

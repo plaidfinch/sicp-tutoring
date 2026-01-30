@@ -5,50 +5,73 @@ PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
 echo "=== SICP Tutoring Setup ==="
 
-# Check Racket
-if command -v racket &>/dev/null; then
-    echo "✓ Racket found: $(racket --version | head -1)"
-else
-    echo "✗ Racket not found - install from https://racket-lang.org/"
-    MISSING_RACKET=1
+# === Dependency Check (early exit if missing) ===
+MISSING_DEPS=()
+
+command -v git &>/dev/null || MISSING_DEPS+=("git")
+command -v pandoc &>/dev/null || MISSING_DEPS+=("pandoc")
+command -v racket &>/dev/null || MISSING_DEPS+=("racket")
+command -v curl &>/dev/null || MISSING_DEPS+=("curl")
+command -v unzip &>/dev/null || MISSING_DEPS+=("unzip")
+
+if [ ${#MISSING_DEPS[@]} -gt 0 ]; then
+    echo "MISSING_DEPENDENCIES: ${MISSING_DEPS[*]}"
+    echo ""
+    echo "The tutor needs these tools installed. Claude will help install them."
+    exit 1
 fi
 
-# Check/install SICP package
-if command -v racket &>/dev/null; then
-    if racket -e '(require sicp)' 2>/dev/null; then
-        echo "✓ SICP package installed"
-    else
-        echo "Installing SICP package..."
-        raco pkg install sicp
-    fi
+# === All dependencies present, proceed with setup ===
+
+# Check/install SICP Racket package
+if racket -e '(require sicp)' 2>/dev/null; then
+    echo "✓ SICP package installed"
+else
+    echo "Installing SICP package..."
+    raco pkg install sicp
 fi
 
-# Fetch book
-# Use a marker file to track successful completion, not just directory existence
-BOOK_COMPLETE_MARKER="$PROJECT_DIR/book/.fetch-complete"
-if [ -f "$BOOK_COMPLETE_MARKER" ]; then
-    echo "✓ Book already fetched"
+# Initialize submodule
+if [ ! -f "$PROJECT_DIR/book/sicp-source/html/index.xhtml" ]; then
+    echo "Initializing SICP book submodule..."
+    git -C "$PROJECT_DIR" submodule update --init --depth 1 book/sicp-source
+    echo "✓ Book submodule initialized"
 else
-    echo "Fetching SICP book from MIT..."
-    # Clean up any partial previous attempts
-    rm -rf "$PROJECT_DIR/book/full-text" "$PROJECT_DIR/book/code"
+    echo "✓ Book submodule present"
+fi
+
+# Process to markdown (one-time, requires pandoc)
+PROCESSED_MARKER="$PROJECT_DIR/book/text/.processed"
+if [ ! -f "$PROCESSED_MARKER" ]; then
+    echo "Processing book to markdown..."
+    "$PROJECT_DIR/scripts/process-book.sh"
+    mkdir -p "$PROJECT_DIR/book/text"
+    touch "$PROCESSED_MARKER"
+    touch "$PROJECT_DIR/.tutor-verify-book"
+    echo "✓ Book processed to markdown"
+else
+    echo "✓ Book already processed"
+fi
+
+# Fetch problem sets and code from MIT (not in sarabander repo)
+MIT_MARKER="$PROJECT_DIR/book/.mit-fetched"
+if [ ! -f "$MIT_MARKER" ]; then
+    echo "Fetching problem sets and code from MIT..."
     mkdir -p "$PROJECT_DIR/book"
-
-    curl -L --progress-bar -o /tmp/sicp.zip \
-        "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip" 2>&1
-    unzip -o -q /tmp/sicp.zip -d "$PROJECT_DIR/book/"
+    curl -sL -o /tmp/sicp.zip \
+        "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip"
+    # Extract only psets and code directories
+    unzip -o -q /tmp/sicp.zip "psets/*" "code/*" -d "$PROJECT_DIR/book/" 2>/dev/null || true
     rm /tmp/sicp.zip
-
+    # Extract the .scm source files
     if [ -f "$PROJECT_DIR/book/code/allcode.zip" ]; then
         mkdir -p "$PROJECT_DIR/book/code/extracted"
         unzip -o -q "$PROJECT_DIR/book/code/allcode.zip" -d "$PROJECT_DIR/book/code/extracted/"
     fi
-
-    # Mark as complete only after all steps succeed
-    touch "$BOOK_COMPLETE_MARKER"
-    # Signal tutor to verify contents on first session
-    touch "$PROJECT_DIR/.tutor-verify-book"
-    echo "✓ Book fetched"
+    touch "$MIT_MARKER"
+    echo "✓ Problem sets and code fetched"
+else
+    echo "✓ Problem sets and code present"
 fi
 
 # Initialize tutor workspace (.tutor/)
@@ -132,4 +155,3 @@ fi
 
 echo ""
 echo "Setup complete! Open this directory in Claude Code to begin."
-[ "${MISSING_RACKET:-0}" = "1" ] && echo "⚠ Install Racket before tutoring."

@@ -1,7 +1,11 @@
 # Instance-specific data (created by setup.sh)
 .tutor/
 work/
-book/
+
+# Book content - ignore everything except the submodule
+# book/sicp-source/ is a git submodule (tracked via .gitmodules)
+book/*
+!book/sicp-source/
 
 # OS/editor files
 .DS_Store

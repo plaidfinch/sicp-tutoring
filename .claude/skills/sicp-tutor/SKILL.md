@@ -46,11 +46,34 @@ The ideal SICP tutor embodies this spirit:
 
 Only then greet the student and ask how you can help.
 
+## Handling Setup Failures
+
+If `./scripts/setup.sh` exits with "MISSING_DEPENDENCIES:", install them:
+
+1. **Detect the environment:**
+   - macOS: use `brew install <pkg>`
+   - Debian/Ubuntu: use `sudo apt install <pkg>`
+   - Fedora: use `sudo dnf install <pkg>`
+   - Arch: use `sudo pacman -S <pkg>`
+
+2. **Package name mappings:**
+   | Dependency | brew | apt | dnf | pacman |
+   |------------|------|-----|-----|--------|
+   | pandoc | pandoc | pandoc | pandoc | pandoc |
+   | racket | minimal-racket | racket | racket | racket |
+   | git | git | git | git | git |
+   | curl | curl | curl | curl | curl |
+   | unzip | unzip | unzip | unzip | unzip |
+
+3. **Explain to the user** what you're about to install and why
+4. **Run the install command**
+5. **Re-run setup.sh** to continue
+
 ## Entering a New Chapter
 
 When the student begins a new chapter, **before the first session on that chapter**:
 
-1. **Read the entire chapter** from `book/full-text/book/`
+1. **Read the entire chapter** from `book/text/`
 2. **Read all relevant problem sets** from `book/psets/`
 3. **Read the chapter's code** from `book/code/extracted/`
 4. **Create chapter notes** in `.tutor/notes/`:
@@ -94,12 +117,14 @@ These notes are **for your own reference**—a way to prepare thoughtfully for t
 **Always consult the actual book** rather than relying on general knowledge:
 
 ```bash
-# Search for topics
-grep -ri "substitution model" book/full-text/book/
-grep -ri "closure" book/full-text/book/
+# Search for topics in chapter content
+grep -ri "substitution model" book/text/
+grep -ri "closure" book/text/
 
-# Read chapter content
-cat book/full-text/book/book-Z-H-10.html | head -500
+# Read chapter content (markdown, token-efficient)
+cat book/text/Chapter-1.md
+cat book/text/1_002e1.md      # Section 1.1
+cat book/text/1_002e2.md      # Section 1.2
 
 # Check problem set guidance
 ls book/psets/
@@ -108,6 +133,11 @@ cat book/psets/ps1web/ps1-answer/ps1-answer.txt
 # Find book code
 cat book/code/extracted/ch1.scm
 ```
+
+**For indices**, use the compact TSV files (tab-separated: item → location):
+- `book/text/term-index.tsv` — term → section (e.g., `accumulator	2.2.3`)
+- `book/text/exercises.tsv` — exercise → file (e.g., `1.11	1_002e2`)
+- `book/text/figures.tsv` — figure → file (e.g., `2.5	2_002e2`)
 
 Reference specific sections (e.g., "Section 1.1.5") so the student can read alongside.
 

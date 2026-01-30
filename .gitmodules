@@ -1,0 +1,3 @@
+[submodule "book/sicp-source"]
+	path = book/sicp-source
+	url = https://github.com/sarabander/sicp.git
