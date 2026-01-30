@@ -34,7 +34,7 @@ If the file `.tutor-verify-book` exists in the project root, the book was just i
 ## Welcome the Student
 
 1. Introduce yourself warmly and welcome them to SICP
-2. Ask for their name and how they'd like to be addressed
+2. Ask for their name
 3. Ask about their background:
    - Any prior programming experience?
    - What drew them to SICP?
