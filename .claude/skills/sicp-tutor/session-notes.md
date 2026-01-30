@@ -107,7 +107,8 @@ When patterns recur across sessions, add to `.tutor/knowledge/struggles.md`:
 **Commit every change** to the .tutor repo:
 
 ```bash
-cd .tutor && git add -A && git commit -m "Description"
+git -C .tutor add -A
+git -C .tutor commit -m "Description"
 ```
 
 Sessions may end without warning. Write notes as you go, commit frequently.

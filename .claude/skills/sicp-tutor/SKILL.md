@@ -122,10 +122,19 @@ The student's code lives in `work/`. Treat as **read-only**:
 ### Racket Commands
 
 ```bash
-racket -l sicp work/ch1/scratch.rkt    # Run a file
-racket -l sicp -i                       # Interactive REPL
-echo '#lang sicp\n(+ 1 2)' | racket     # Quick evaluation
+racket -l sicp work/ch1/scratch.rkt    # Run student's file
+racket -l sicp .tutor/scratch/demo.rkt # Run your scratch file
 ```
+
+For quick evaluations, write a scratch file rather than piping to racket:
+
+```scheme
+;; .tutor/scratch/2025-01-30/demo.rkt
+#lang sicp
+(+ 1 2)
+```
+
+Then run it with `racket -l sicp .tutor/scratch/2025-01-30/demo.rkt`.
 
 ### When Code Fails
 

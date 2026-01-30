@@ -28,8 +28,8 @@ If the file `.tutor-verify-book` exists in the project root, the book was just i
 5. **If something is wrong:**
    - Inform the user what's missing or corrupted
    - For submodule issues: `git submodule update --init book/sicp-source`
-   - For markdown issues: `rm book/text/.processed && ./scripts/setup.sh`
-   - For MIT content: `rm book/.mit-fetched && ./scripts/setup.sh`
+   - For markdown issues: `rm book/text/.processed` then `./scripts/setup.sh`
+   - For MIT content: `rm book/.mit-fetched` then `./scripts/setup.sh`
 
 ## Welcome the Student
 
@@ -48,6 +48,10 @@ After gathering information:
 
 1. Update `.tutor/knowledge/preferences.md` with student identity and initial observations
 2. Update `.tutor/knowledge/progress.json`: set `last_session` to today, `total_sessions` to 1
-3. Commit: `cd .tutor && git add -A && git commit -m "First session: met [name]"`
+3. Commit:
+   ```bash
+   git -C .tutor add -A
+   git -C .tutor commit -m "First session: met [name]"
+   ```
 
 Then proceed to normal session startup (reading chapter notes, greeting, etc.).

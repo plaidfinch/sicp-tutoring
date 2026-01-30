@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(path:work/**)",
+      "Write(path:work/**)",
+      "Edit(path:book/**)",
+      "Write(path:book/**)",
+      "Edit(path:scripts/**)",
+      "Write(path:scripts/**)",
+      "Edit(path:.claude/**)",
+      "Write(path:.claude/**)",
+      "Bash(echo:*)",
+      "Bash(rm -rf:*)",
+      "Bash(rm -r:*)",
+      "Bash(git push:*)",
+      "Bash(git config:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)"
+    ],
+    "allow": [
+      "Edit(path:.tutor/**)",
+      "Write(path:.tutor/**)",
+      "Bash(racket:*)",
+      "Bash(git -C .tutor add:*)",
+      "Bash(git -C .tutor commit:*)",
+      "Bash(git -C .tutor status:*)",
+      "Bash(git -C .tutor log:*)",
+      "Bash(git -C .tutor diff:*)",
+      "Bash(mkdir -p .tutor:*)",
+      "Bash(rm .tutor-verify-book)",
+      "Bash(rm book/text/.processed)",
+      "Bash(rm book/.mit-fetched)",
+      "Bash(git submodule update:*)",
+      "Bash(./scripts/setup.sh:*)",
+      "Bash(./scripts/process-book.sh:*)",
+      "Bash(command -v:*)",
+      "Bash(raco pkg install sicp)",
+      "Bash(ls:*)",
+      "Bash(test:*)"
+    ]
+  }
+}
