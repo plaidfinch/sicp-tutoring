@@ -1,28 +1,24 @@
 # SICP Tutoring Environment
 
-A Claude Code skill for tutoring through *Structure and Interpretation of Computer Programs*.
+A Claude Code skill for tutoring through [*Structure and Interpretation of Computer Programs*](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html).
 
 ## Quick Start
 
-1. **Install Racket** from https://racket-lang.org/
-2. **Run setup:**
-   ```bash
-   ./scripts/setup.sh
-   ```
-3. **Open Claude Code** and start learning!
-
-The setup script handles:
-
-- Installing the SICP language package
-- Fetching the complete book from MIT
-- Initializing git repos
+1. Install [Racket](https://racket-lang.org)
+2. Install [Claude Code](https://claude.com/product/claude-code)
+3. Open a terminal and run `claude` from this directory, then say hello: Claude will set up your learning environment
+4. Open the DrRacket application, pick up [the book](https://web.mit.edu/6.001/6.037/sicp.pdf), and get to work!
 
 ## Directory Overview
 
-- `.claude/skills/sicp-tutor/` — Tutoring skill (Claude reads this)
-- `.tutor/` — Tutor's private workspace (knowledge, notes, scratch)
-- `book/` — SICP book resources (auto-fetched)
-- `work/` — Your code (git repo)
+- `work/` — Your code and other work for the course (git repository initialized by Claude on first setup)
+- `.claude/skills/sicp-tutor/` — Detailed instructions teaching Claude how to be your TA
+- `.tutor/` — Claude's private workspace (knowledge, notes, scratch, might contain spoilers or solutions)
+- `book/` — SICP book resources (auto-fetched on first setup)
 
-You should do all your work in `work/`, so Claude can see what you're doing. Claude is instructed
-to never write your code for you, only to act as a teaching assistant.
+**You should do all your work in `work/`**, so Claude can see what you're doing.
+Claude is instructed to never write your code for you, only to act as a teaching assistant, so from
+Claude's perspective, `work/` is read-only.
+
+I recommend tracking your progressive work using `git`; Claude can help you learn to do that if you are new to
+using version control.
