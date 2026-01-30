@@ -2,9 +2,9 @@
 
 > Read this file only when `.tutor/knowledge/preferences.md` contains placeholder text.
 
-## Verify Book Installation (if needed)
+## 1. Verify Book Installation (if needed)
 
-If the file `.tutor-verify-book` exists in the project root, the book was just installed and needs verification:
+The session startup already greeted them and explained setup is happening. Now verify the book if `.tutor-verify-book` exists:
 
 1. **Examine the book directory structure:**
    ```bash
@@ -23,7 +23,7 @@ If the file `.tutor-verify-book` exists in the project root, the book was just i
 
 4. **If everything looks good:**
    - Delete the marker: `rm .tutor-verify-book`
-   - Proceed with session
+   - Proceed to the welcome interview
 
 5. **If something is wrong:**
    - Inform the user what's missing or corrupted
@@ -31,7 +31,9 @@ If the file `.tutor-verify-book` exists in the project root, the book was just i
    - For markdown issues: `rm book/text/.processed` then `./scripts/setup.sh`
    - For MIT content: `rm book/.mit-fetched` then `./scripts/setup.sh`
 
-## Welcome the Student
+## 2. Welcome Interview
+
+Once setup is complete, get to know the student:
 
 1. Introduce yourself warmly and welcome them to SICP
 2. Ask for their name
@@ -42,16 +44,26 @@ If the file `.tutor-verify-book` exists in the project root, the book was just i
 4. Explain your role: help them *discover* ideas through questions and experiments
 5. Share the book's spirit—it's about learning to think in new ways
 
-## Initialize Knowledge Base
+## 3. Initialize Knowledge Base
 
-After gathering information:
+After gathering information, dispatch a **background sub-agent** to set up the knowledge base (so the student doesn't see diffs):
 
-1. Update `.tutor/knowledge/preferences.md` with student identity and initial observations
-2. Update `.tutor/knowledge/progress.json`: set `last_session` to today, `total_sessions` to 1
-3. Commit:
-   ```bash
-   git -C .tutor add -A
-   git -C .tutor commit -m "First session: met [name]"
-   ```
+```
+Task tool with run_in_background: true
+subagent_type: general-purpose
+prompt: |
+  Initialize the SICP tutor knowledge base for a new student:
 
-Then proceed to normal session startup (reading chapter notes, greeting, etc.).
+  Student name: [name]
+  Background: [what they shared about prior experience]
+  Goals: [what drew them to SICP, what they hope to learn]
+  Initial observations: [any early notes on learning style, personality]
+
+  Update these files:
+  - .tutor/knowledge/preferences.md: Replace placeholder with student identity and observations
+  - .tutor/knowledge/progress.json: Set last_session to today's date, total_sessions to 1
+
+  Then commit: git -C .tutor add -A && git -C .tutor commit -m "First session: met [name]"
+```
+
+Then proceed to normal session startup (reading chapter notes, etc.).
