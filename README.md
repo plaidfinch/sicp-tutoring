@@ -6,8 +6,8 @@ A Claude Code skill for tutoring through [*Structure and Interpretation of Compu
 
 1. Install [git](https://git-scm.com/install/) so you can clone this repository and track your changes as you progress through the book
 2. Clone this repository in the command line and enter it:
-   `git clone https://github.com/plaidfinch/sicp-tutoring && cd sicp-tutoring`
-4. Run `./tutor` — installs [Claude Code](https://claude.com/product/claude-code) if needed, then guides you through setup (including [Racket/DrRacket](https://www.racket-lang.org/))
+   `git clone https://github.com/plaidfinch/sicp-tutoring`
+4. Run `./tutor` from the `sicp-tutoring` directory — installs [Claude Code](https://claude.com/product/claude-code) if needed, then guides you through setup (including [Racket/DrRacket](https://www.racket-lang.org/))
 5. Open DrRacket, pick up [the book](https://web.mit.edu/6.001/6.037/sicp.pdf), and get to work!
 
 ## Directory Overview
