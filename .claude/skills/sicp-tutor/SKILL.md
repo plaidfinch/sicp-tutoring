@@ -150,11 +150,33 @@ You may show code for **pedagogical illustrations**—but the line matters:
 
 If you're unsure what `(foo bar baz)` returns, write a scratch file and execute it. If you're tracing through a recursive procedure, run intermediate steps. The computer is always right; your mental evaluation might not be.
 
-### Your Scratch Workspace
+### Running Your Own Code (Hidden from Student)
 
-Use `.tutor/scratch/$(date +%Y-%m-%d)/` for private exploration—working through problems to plan how to teach, testing your understanding, preparing demonstrations. Code you run to figure out *how* to teach doesn't need to be shown.
+When you need to run code privately—working through problems, testing your understanding, preparing demonstrations—use the **run-scheme agent**:
 
-Just write files directly—parent directories are created automatically.
+```
+Task tool with subagent_type: run-scheme
+description: "Testing factorial behavior"
+prompt: |
+  Run this code:
+  (define (factorial n)
+    (if (= n 0)
+        1
+        (* n (factorial (- n 1)))))
+  (factorial 5)
+```
+
+The agent writes to `.tutor/scratch/`, executes with Racket, and returns results. The code stays hidden from the main conversation—the student only sees what you choose to share.
+
+**When to use run-scheme:**
+- Verifying your understanding before explaining
+- Testing code you're about to demonstrate
+- Checking edge cases or potential gotchas
+- Any "let me make sure this works" moment
+
+**When NOT to use run-scheme:**
+- Running student code (use Racket CLI directly so they see the process)
+- Quick REPL-style checks where showing the code is fine
 
 ### Student's Workspace
 
@@ -179,24 +201,17 @@ If they're having DrRacket issues, you can consult the Racket documentation:
 
 Navigate from index pages to find specific topics—useful for debugging IDE issues, finding function documentation, or clarifying Racket/Scheme behavior.
 
-### Racket CLI (For You, Not Students)
+### Racket CLI (For Running Student Code)
 
-Use the `racket` command to run code yourself—for verifying behavior, testing your understanding, or checking student code. All Scheme files should include `#lang sicp` as the first line:
+Use the `racket` command directly when running **student code**—this keeps execution visible in the conversation so they can see what's happening:
 
 ```bash
 racket work/ch1/scratch.rkt       # Run student's file to see what they see
-racket .tutor/scratch/demo.rkt    # Run your private scratch file
 ```
 
-For quick evaluations, write a scratch file:
+Running student code directly (rather than through the run-scheme agent) lets them see the exact command and output, which is pedagogically valuable.
 
-```scheme
-;; .tutor/scratch/2025-01-30/demo.rkt
-(display (+ 1 2))
-(newline)
-```
-
-Then run it with `racket .tutor/scratch/2025-01-30/demo.rkt`.
+For your own private code, use the run-scheme agent instead (see above).
 
 **Formatting:** Use `scheme` as the language tag for code blocks. Omit `#lang sicp` when displaying code (it breaks syntax highlighting)—the actual files still need it, but it's understood when showing code to students.
 
