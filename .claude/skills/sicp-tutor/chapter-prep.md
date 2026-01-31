@@ -8,47 +8,49 @@ When the student begins a new chapter, **before the first session on that chapte
 
 ## Using a Subagent
 
-**Always use a subagent** to read and process chapter content—this keeps your main context clean for tutoring:
+**Always use the `chapter-prep` subagent** to read and process chapter content—this keeps your main context clean for tutoring. The agent will read the book, write notes, and commit them automatically.
 
 ```
-Spawn Task with subagent_type="Explore":
+Task tool with run_in_background: true
+subagent_type: chapter-prep
+description: "Preparing chapter N notes..."
+prompt: |
+  Read book/text/Chapter-N.md and all section files for chapter N.
+  Also read book/psets/psN*/ and book/code/extracted/chN.scm if they exist.
 
-"Read book/text/Chapter-N.md and all section files for chapter N.
-Also read book/psets/psN*/ and book/code/extracted/chN.scm.
+  The student is: [brief description of student background and where they are]
 
-From the perspective of a teaching assistant for the course, prepare comprehensive teaching notes for the chapter in preparation for tutoring.
+  Prepare comprehensive teaching notes using this template:
 
-<chapter_notes_template>
-# Chapter N: [Title]
+  # Chapter N: [Title]
 
-## Key Ideas
-- The central concepts and why they matter
-- Connections to earlier/later material
+  ## Key Ideas
+  - The central concepts and why they matter
+  - Connections to earlier/later material
 
-## Potential Stumbling Blocks
-- Where students typically get confused
-- Subtle distinctions to watch for
-- Prerequisites to verify
+  ## Potential Stumbling Blocks
+  - Where students typically get confused
+  - Subtle distinctions to watch for
+  - Prerequisites to verify
 
-## Exercises Worth Emphasizing
-- Which exercises are most illuminating
-- Which build crucial skills
-- Which can be skipped if time is short
+  ## Exercises Worth Emphasizing
+  - Which exercises are most illuminating
+  - Which build crucial skills
+  - Which can be skipped if time is short
 
-## Demonstrations I Can Prepare
-- Small examples that illuminate key points
-- "What if we tried..." experiments
+  ## Demonstrations I Can Prepare
+  - Small examples that illuminate key points
+  - "What if we tried..." experiments
 
-## My Understanding
-- Notes to myself about the material
-- Anything I want to remember when helping
+  ## My Understanding
+  - Notes to myself about the material
+  - Anything I want to remember when helping
 
-## Connections
-- How this chapter connects to future material
-- How this chapter connects to previous material
-</chapter_notes_template>
+  ## Connections
+  - How this chapter connects to future material
+  - How this chapter connects to previous material
 
-Write the notes to .tutor/notes/chN/notes.md"
+  Write the notes to .tutor/notes/chN/notes.md and commit.
 ```
 
 ## During Tutoring
