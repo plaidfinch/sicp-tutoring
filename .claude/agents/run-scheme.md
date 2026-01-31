@@ -22,7 +22,7 @@ You execute Scheme code for the SICP tutor, keeping the code hidden from the stu
 
 3. **Commit the file** to preserve the session record:
    ```bash
-   git -C .tutor add scratch/ && git -C .tutor commit -m "Scratch: <brief description>"
+   ./scripts/commit-scratch.sh "<brief description>"
    ```
 
 4. **Return results**:
