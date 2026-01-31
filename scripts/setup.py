@@ -231,7 +231,11 @@ def setup_work_workspace(repair_mode):
 
 
 def setup_mit_content(repair_mode):
-    """Fetch problem sets and code from MIT."""
+    """Ensure problem sets and code are present.
+
+    These files are committed to the repo (book/psets/, book/code/) so this
+    typically does nothing. The MIT fetch is a fallback if files are missing.
+    """
     marker = "mit-fetched"
     psets_dir = PROJECT_DIR / "book/psets"
     code_dir = PROJECT_DIR / "book/code"
@@ -242,10 +246,10 @@ def setup_mit_content(repair_mode):
 
     if psets_dir.exists() and code_dir.exists():
         create_marker(marker)
-        print("✓ Problem sets and code present")
+        print("✓ Problem sets and code present (from git)")
         return
 
-    print("Fetching problem sets and code from MIT...")
+    print("Fetching problem sets and code from MIT (fallback)...")
     (PROJECT_DIR / "book").mkdir(exist_ok=True)
 
     result = run(

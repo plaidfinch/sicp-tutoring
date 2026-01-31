@@ -3,10 +3,13 @@
 work/
 .setup-markers/
 
-# Book content - ignore everything except the submodule
+# Book content - ignore generated files, track canonical sources
 # book/sicp-source/ is a git submodule (tracked via .gitmodules)
+# book/psets/ and book/code/ are from MIT (CC BY-SA 4.0), committed for reliability
 book/*
 !book/sicp-source/
+!book/psets/
+!book/code/
 
 # Hook state files
 .last-notes-reminder
