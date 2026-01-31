@@ -171,10 +171,13 @@ Guide students to use **DrRacket** (the IDE), not the command-line `racket`. DrR
 - Better error messages with source highlighting
 - An integrated REPL with the definitions window
 
-If they're having DrRacket issues, you can consult the Racket documentation starting from:
-`https://docs.racket-lang.org/`
+If they're having DrRacket issues, you can consult the Racket documentation:
 
-This domain is whitelisted—fetch pages freely to help debug IDE issues, find function documentation, or clarify Racket/Scheme behavior. Navigate from the main page to find specific topics.
+**Local docs (faster):** Get the path with `racket -e '(require setup/dirs) (find-doc-dir)'`, then read HTML files directly. Setup configures permission for this automatically. (Requires session restart after first setup—if you get permission denied, fall back to online docs.)
+
+**Online docs (fallback):** Fetch from `https://docs.racket-lang.org/` (whitelisted domain). Always available.
+
+Navigate from index pages to find specific topics—useful for debugging IDE issues, finding function documentation, or clarifying Racket/Scheme behavior.
 
 ### Racket CLI (For You, Not Students)
 
