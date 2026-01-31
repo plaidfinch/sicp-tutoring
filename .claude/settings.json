@@ -21,6 +21,7 @@
       "Bash(wget:*)"
     ],
     "allow": [
+      "WebFetch(domain:docs.racket-lang.org)",
       "Skill(sicp-tutor)",
       "Edit(.tutor/**)",
       "Write(.tutor/**)",
@@ -37,7 +38,7 @@
       "Bash(./scripts/setup.sh:*)",
       "Bash(./scripts/process-book.sh:*)",
       "Bash(command -v:*)",
-      "Bash(raco pkg install sicp)",
+      "Bash(raco pkg install:*)",
       "Bash(ls:*)",
       "Bash(test:*)"
     ]

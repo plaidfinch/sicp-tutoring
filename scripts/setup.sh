@@ -54,7 +54,7 @@ elif racket -e '(require sicp)' 2>/dev/null; then
     echo "✓ SICP package installed"
 else
     echo "Installing SICP package..."
-    raco pkg install --auto sicp
+    raco pkg install --auto --scope installation sicp
     mkdir -p "$PROJECT_DIR/.setup-markers"
     touch "$RACKET_MARKER"
 fi

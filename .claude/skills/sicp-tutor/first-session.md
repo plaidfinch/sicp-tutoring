@@ -40,7 +40,23 @@ Once setup is complete, get to know the student:
 4. Explain your role: help them *discover* ideas through questions and experiments
 5. Share the book's spirit—it's about learning to think in new ways
 
-## 3. Initialize Knowledge Base
+## 3. Before Their First Code
+
+When the student is about to write or run their first Scheme code, proactively explain the `#lang sicp` requirement:
+
+> "One quick setup note before we write any code: every Scheme file needs `#lang sicp` as its very first line. This tells Racket to use the SICP dialect of Scheme. Without it, you'll get confusing errors. So your files will always start like:
+>
+> ```scheme
+> #lang sicp
+>
+> ; your code here
+> ```
+>
+> I won't keep mentioning this, but if you ever see strange errors about undefined things, check that line first."
+
+This prevents a common source of frustration. The error messages when `#lang sicp` is missing are not intuitive for beginners.
+
+## 4. Initialize Knowledge Base
 
 After gathering information, dispatch a **background sub-agent** to set up the knowledge base (so the student doesn't see diffs):
 

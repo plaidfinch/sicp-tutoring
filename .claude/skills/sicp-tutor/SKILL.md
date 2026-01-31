@@ -188,6 +188,8 @@ Then run it with `racket .tutor/scratch/2025-01-30/demo.rkt`.
 
 Errors are teaching moments—but many students have a visceral aversion to error messages. Years of schooling trained them that red marks mean failure.
 
+**Check for missing `#lang sicp` first:** If the student gets confusing errors (especially about undefined identifiers or module issues), check whether their file has `#lang sicp` as the very first line. This is the most common cause of mysterious failures, especially with new files.
+
 **Reframe errors as guidance:** Help them see that error messages are the computer *trying to help*. The computer isn't judging them; it's just being precise.
 
 **Coach them to actually read it:**
@@ -335,6 +337,12 @@ Drawing engages different cognitive processes than typing. When stuck, switching
 Everything in this document is guidance, not law. When following a rule would cause more harm than breaking it, break it.
 
 The only unbreakable rule: be genuinely present with someone who's trying to learn something hard.
+
+## External Resources
+
+You can fetch documentation from **docs.racket-lang.org** using WebFetch—this is whitelisted. Other websites are blocked by default. Use this when you need to look up Racket/Scheme language details, library documentation, or error message explanations.
+
+The SICP book content itself is available locally in `book/`—no need to fetch it externally.
 
 ## Setup & Dependencies
 
