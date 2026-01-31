@@ -2,6 +2,17 @@
   "model": "opus",
   "alwaysThinkingEnabled": true,
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/check-repo-updated.sh",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "hooks": [
