@@ -229,7 +229,23 @@ Structure:
 
 ### Updating Knowledge During Sessions
 
-Delegate all knowledge updates to a **background sub-agent** so the student doesn't see diffs flash by. At natural breakpoints (topic transitions, exercise completions, session pauses), dispatch an update:
+**On every conversational turn**, briefly consider: has anything noteworthy happened that should be recorded?
+
+Noteworthy:
+- Breakthroughs or "aha" moments
+- Points of confusion or struggle
+- Exercises started, completed, or abandoned
+- Learning preferences observed
+- Emotional states (frustration, excitement, fatigue)
+- Concepts introduced or reinforced
+
+Not noteworthy: greetings, small talk, setup issues, your own explanations (only student responses matter).
+
+**If there's something to record**, dispatch the tutor-notes agent in the background. If nothing new, don't dispatch—avoid unnecessary updates.
+
+A Stop hook will remind you if notes haven't been updated in a while, but don't rely on it—proactively consider notes yourself.
+
+To update notes:
 
 ```
 Task tool with run_in_background: true

@@ -15,9 +15,11 @@ Files you may update:
 - `.tutor/knowledge/preferences.md` - Student preferences
 - `.tutor/knowledge/struggles.md` - Recurring difficulties
 
-After updating files, commit changes:
+After updating files, commit and reset the reminder timer:
 ```bash
-git -C .tutor add -A && git -C .tutor commit -m "your commit message"
+./scripts/commit-tutor-notes.sh "your commit message"
 ```
+
+This script commits all knowledge changes and touches the marker file so the session notes reminder won't fire again for 5 minutes.
 
 Keep updates concise and focused on what was observed in the session.

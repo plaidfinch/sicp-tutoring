@@ -53,6 +53,8 @@ prompt: |
   Write the notes to .tutor/notes/chN/notes.md and commit.
 ```
 
+The agent will read the chapter materials, write notes to `.tutor/notes/chN/notes.md`, and commit them.
+
 ## During Tutoring
 
 **Read your chapter notes fully** into context when tutoring that chapter—don't summarize them, read the whole file. These are your prepared materials; you should have them at hand.

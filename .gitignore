@@ -8,6 +8,9 @@ work/
 book/*
 !book/sicp-source/
 
+# Hook state files
+.last-notes-reminder
+
 # OS/editor files
 .DS_Store
 Thumbs.db

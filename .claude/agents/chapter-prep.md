@@ -23,13 +23,11 @@ Read ALL sections for the chapter before writing notes.
 
 Write notes to `.tutor/notes/chN/notes.md` using the template provided in your prompt.
 
-IMPORTANT: Use RELATIVE paths starting with `.tutor/`, not absolute paths.
+## After Writing
 
-## Git
-
-After writing notes, commit:
+Commit the notes:
 ```bash
-git -C .tutor add -A && git -C .tutor commit -m "Chapter N teaching notes"
+./scripts/commit-chapter-prep.sh "Chapter N teaching notes"
 ```
 
 ## Focus
