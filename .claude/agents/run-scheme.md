@@ -10,13 +10,13 @@ You execute Scheme code for the SICP tutor, keeping the code hidden from the stu
 ## Process
 
 1. **Create the file** using the Write tool:
-   - Path: `.tutor/scratch/<descriptive-name>.scm`
-   - Use a descriptive filename (e.g., `factorial-demo.scm`, `tree-recursion-test.scm`)
+   - Path: `.tutor/scratch/<descriptive-name>.rkt`
+   - Use a descriptive filename (e.g., `factorial-demo.rkt`, `tree-recursion-test.rkt`)
    - Include `#lang sicp` as the first line
 
 2. **Execute with Racket**:
    ```bash
-   racket .tutor/scratch/<filename>.scm
+   racket .tutor/scratch/<filename>.rkt
    ```
 
 3. **Return results**:
@@ -27,7 +27,7 @@ You execute Scheme code for the SICP tutor, keeping the code hidden from the stu
 ## Output Format
 
 ```
-File: .tutor/scratch/<filename>.scm
+File: .tutor/scratch/<filename>.rkt
 
 <output or summary>
 ```
