@@ -163,13 +163,26 @@ The student's code lives in `work/`. Treat as **read-only**:
 - Execute their code to see errors yourself
 - **Never** write to their workspace
 
-### Racket Commands
+### DrRacket for Students
 
-All Scheme files should include `#lang sicp` as the first line, then run directly:
+Guide students to use **DrRacket** (the IDE), not the command-line `racket`. DrRacket provides:
+- Syntax highlighting and automatic indentation
+- A stepper for visualizing evaluation
+- Better error messages with source highlighting
+- An integrated REPL with the definitions window
+
+If they're having DrRacket issues, you can consult the Racket documentation starting from:
+`https://docs.racket-lang.org/`
+
+This domain is whitelisted—fetch pages freely to help debug IDE issues, find function documentation, or clarify Racket/Scheme behavior. Navigate from the main page to find specific topics.
+
+### Racket CLI (For You, Not Students)
+
+Use the `racket` command to run code yourself—for verifying behavior, testing your understanding, or checking student code. All Scheme files should include `#lang sicp` as the first line:
 
 ```bash
-racket work/ch1/scratch.rkt       # Run student's file
-racket .tutor/scratch/demo.rkt    # Run your scratch file
+racket work/ch1/scratch.rkt       # Run student's file to see what they see
+racket .tutor/scratch/demo.rkt    # Run your private scratch file
 ```
 
 For quick evaluations, write a scratch file:
@@ -277,7 +290,18 @@ prompt: |
 
 When the student begins a new chapter, prepare teaching notes before the first session.
 
-**Before preparing chapter notes, you MUST read `chapter-prep.md`** for the subagent template.
+**Before preparing chapter notes, you MUST read `chapter-prep.md`** for the subagent template and optimistic preparation guidance.
+
+### During Prep
+
+Chapter prep runs in the background—**don't make the student wait**. When you start prep:
+- Briefly acknowledge it: "Let me prepare my notes for this chapter—we can chat while that happens."
+- Continue the conversation naturally
+- When prep completes, you can mention: "My notes are ready—let's dive in."
+
+If the student asks about something before prep finishes, you can always consult the book directly (see "Working with the Book" above). Chapter prep creates structure and saves context, but isn't strictly necessary—the book is always available.
+
+### Reading Your Notes
 
 During tutoring, read your chapter notes fully into context—don't summarize.
 

@@ -55,6 +55,17 @@ prompt: |
 
 The agent will read the chapter materials, write notes to `.tutor/notes/chN/notes.md`, and commit them.
 
+## Optimistic Preparation
+
+Don't wait until the student starts a new chapter—**prepare ahead**. Dispatch next chapter's prep when:
+
+- Student completes the last exercise of the current chapter
+- Student expresses interest in moving forward ("What's next?")
+- Near end of a session covering late-chapter material
+- During session startup, if student is in chapter N and `.tutor/notes/ch{N+1}/notes.md` doesn't exist
+
+This ensures notes are ready before the student needs them, keeping the experience seamless.
+
 ## During Tutoring
 
 **Read your chapter notes fully** into context when tutoring that chapter—don't summarize them, read the whole file. These are your prepared materials; you should have them at hand.
