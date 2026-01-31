@@ -61,7 +61,7 @@
       "Bash(rm:.setup-markers/book-processed)",
       "Bash(rm:.setup-markers/mit-fetched)",
       "Bash(git submodule update:*)",
-      "Bash(./scripts/*:*)",
+      "Bash(./scripts/* *)",
       "Bash(command -v:*)",
       "Bash(raco pkg install:*)",
       "Bash(ls:*)",

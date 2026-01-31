@@ -45,3 +45,12 @@ File: .tutor/scratch/YYYY-MM-DD/<filename>.rkt
 - Always commit scratch files — they may be referenced in session summaries
 - Do not add explanations unless explicitly asked to summarize
 - This agent is for tutor-written code only; student code should be executed directly via the Racket CLI in the main session
+
+## Spoiler Warning
+
+The **filename** and **commit description** are briefly visible to the student (they see the agent's output format). Choose names that don't reveal answers:
+
+- **Bad**: `exercise-1-3-solution.rkt`, commit "Scratch: solution to 1.3"
+- **Good**: `sum-of-squares-test.rkt`, commit "Scratch: testing sum-of-squares variants"
+
+The code itself stays hidden, but metadata leaks. Be mindful.
