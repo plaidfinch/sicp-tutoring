@@ -4,7 +4,7 @@ A Claude Code skill for tutoring through [*Structure and Interpretation of Compu
 
 ## Quick Start
 
-1. Run `./tutor` — installs Claude Code if needed, then guides you through setup (including Racket/DrRacket)
+1. Run `./tutor` — installs [Claude Code](https://claude.com/product/claude-code) if needed, then guides you through setup (including Racket/DrRacket)
 2. Open DrRacket, pick up [the book](https://web.mit.edu/6.001/6.037/sicp.pdf), and get to work!
 
 ## Directory Overview
