@@ -5,9 +5,10 @@
 # This script:
 # - Archives current TA context to a named branch in .tutor/
 # - Resets .tutor/ knowledge files to initial placeholders
-# - Removes derived book content (text/, code/, psets/)
+# - Removes derived book content (text/)
 # - Removes setup markers
 # - PRESERVES student work in work/
+# - PRESERVES book/code/ and book/psets/ (tracked in version control)
 #
 # Usage: ./scripts/reset.sh [archive-name]
 #   archive-name: Branch name for archived state (default: archive-YYYY-MM-DD-HHMMSS)
@@ -27,11 +28,12 @@ echo ""
 echo "This will:"
 echo "  • Archive .tutor/ state to branch: $ARCHIVE_NAME"
 echo "  • Reset all TA knowledge to initial state"
-echo "  • Remove cached book content (text/, code/, psets/)"
+echo "  • Remove cached book content (text/)"
 echo "  • Remove setup markers"
 echo ""
 echo "This will NOT touch:"
 echo "  • work/ (student code)"
+echo "  • book/code/ and book/psets/ (tracked in version control)"
 echo "  • book/sicp-source/ (submodule)"
 echo ""
 read -p "Continue? [y/N] " -n 1 -r
@@ -163,27 +165,19 @@ if [[ -d .tutor/.git ]]; then
 fi
 
 # =============================================================================
-# Phase 3: Remove derived book content
+# Phase 3: Remove derived book content (text/ only)
 # =============================================================================
 
 echo ""
-echo ">>> Removing derived book content"
+echo ">>> Removing derived book content (preserving code/ and psets/)"
 
 if [[ -d book/text ]]; then
     rm -rf book/text
     echo "    Removed book/text/"
 fi
 
-if [[ -d book/code ]]; then
-    rm -rf book/code
-    echo "    Removed book/code/"
-fi
-
-if [[ -d book/psets ]]; then
-    rm -rf book/psets
-    echo "    Removed book/psets/"
-fi
-
+# Keep book/code/ and book/psets/ (now tracked in version control)
+echo "    Preserved book/code/ and book/psets/"
 # Keep book/sicp-source/ (the submodule)
 echo "    Preserved book/sicp-source/"
 
