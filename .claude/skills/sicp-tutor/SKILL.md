@@ -189,12 +189,12 @@ Am I debugging with them?
 
 For student code or demonstrations, **always use the file-based workflow**:
 
-1. Code goes in a `.rkt` file (student code lives in `work/`, your demos in `.tutor/scratch/`)
+1. Code goes in a `.rkt` file (student code lives in `work/`, your demos in `.tutor/scratch/YYYY-MM-DD/`)
 2. Run with `racket <path-to-file>`
 
 ```bash
-racket work/ch1/exercise-1.3.rkt      # Run student's file
-racket .tutor/scratch/demo.rkt        # Run your demonstration
+racket work/ch1/exercise-1.3.rkt              # Run student's file
+racket .tutor/scratch/2025-01-15/demo.rkt     # Run your demonstration
 ```
 
 **Never use `racket -e`** for SICP code. The `-e` flag doesn't support `#lang sicp`, causing confusing errors about `#lang` not being enabled.
@@ -217,7 +217,7 @@ prompt: |
   (factorial 5)
 ```
 
-The agent writes to `.tutor/scratch/`, executes with Racket, and returns results. The code stays hidden from the conversation—the student only sees what you choose to share afterward.
+The agent writes to `.tutor/scratch/YYYY-MM-DD/`, executes with Racket, and returns results. The code stays hidden from the conversation—the student only sees what you choose to share afterward.
 
 ### Student's Workspace
 

@@ -10,16 +10,22 @@ You execute Scheme code for the SICP tutor, keeping the code hidden from the stu
 ## Process
 
 1. **Create the file** using the Write tool:
-   - Path: `.tutor/scratch/<descriptive-name>.rkt`
+   - Path: `.tutor/scratch/YYYY-MM-DD/<descriptive-name>.rkt` (use today's date)
    - Use a descriptive filename (e.g., `factorial-demo.rkt`, `tree-recursion-test.rkt`)
    - Include `#lang sicp` as the first line
+   - Create the date directory if it doesn't exist
 
 2. **Execute with Racket**:
    ```bash
-   racket .tutor/scratch/<filename>.rkt
+   racket .tutor/scratch/YYYY-MM-DD/<filename>.rkt
    ```
 
-3. **Return results**:
+3. **Commit the file** to preserve the session record:
+   ```bash
+   git -C .tutor add scratch/ && git -C .tutor commit -m "Scratch: <brief description>"
+   ```
+
+4. **Return results**:
    - **Default**: Return the complete, unabridged output with no commentary
    - **If summary requested**: Summarize according to the instructions in your prompt
    - **Always include**: The exact filename you created
@@ -27,7 +33,7 @@ You execute Scheme code for the SICP tutor, keeping the code hidden from the stu
 ## Output Format
 
 ```
-File: .tutor/scratch/<filename>.rkt
+File: .tutor/scratch/YYYY-MM-DD/<filename>.rkt
 
 <output or summary>
 ```
@@ -36,5 +42,6 @@ File: .tutor/scratch/<filename>.rkt
 
 - Use RELATIVE paths starting with `.tutor/`
 - Always use `#lang sicp` for SICP-compatible Scheme
+- Always commit scratch files — they may be referenced in session summaries
 - Do not add explanations unless explicitly asked to summarize
 - This agent is for tutor-written code only; student code should be executed directly via the Racket CLI in the main session
