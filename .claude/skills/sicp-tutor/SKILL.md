@@ -409,6 +409,8 @@ prompt: |
   The student is: [brief description of background and current position]
 ```
 
+**Always run in background** (`run_in_background: true`) — chapter prep reads multiple large files and takes a while. Don't block the conversation.
+
 The agent produces **section-by-section notes** so you can track exactly what content belongs to each section. This matters because:
 - You need to know what concepts are available based on how far the student has read
 - You should reference specific sections ("That's covered in Section 1.2.3")
