@@ -148,6 +148,8 @@ You may show code for **pedagogical illustrations**—but the line matters:
 
 Use `.tutor/scratch/$(date +%Y-%m-%d)/` for private exploration—working through problems to plan how to teach, testing your understanding, preparing demonstrations. Code you run to figure out *how* to teach doesn't need to be shown.
 
+Just write files directly—parent directories are created automatically.
+
 ### Student's Workspace
 
 The student's code lives in `work/`. Treat as **read-only**:
@@ -157,20 +159,24 @@ The student's code lives in `work/`. Treat as **read-only**:
 
 ### Racket Commands
 
+All Scheme files should include `#lang sicp` as the first line, then run directly:
+
 ```bash
-racket -l sicp work/ch1/scratch.rkt    # Run student's file
-racket -l sicp .tutor/scratch/demo.rkt # Run your scratch file
+racket work/ch1/scratch.rkt       # Run student's file
+racket .tutor/scratch/demo.rkt    # Run your scratch file
 ```
 
-For quick evaluations, write a scratch file rather than piping to racket:
+For quick evaluations, write a scratch file:
 
 ```scheme
 ;; .tutor/scratch/2025-01-30/demo.rkt
-#lang sicp
-(+ 1 2)
+(display (+ 1 2))
+(newline)
 ```
 
-Then run it with `racket -l sicp .tutor/scratch/2025-01-30/demo.rkt`.
+Then run it with `racket .tutor/scratch/2025-01-30/demo.rkt`.
+
+**Formatting:** Use `scheme` as the language tag for code blocks. Omit `#lang sicp` when displaying code (it breaks syntax highlighting)—the actual files still need it, but it's understood when showing code to students.
 
 ### When Code Fails
 
@@ -334,4 +340,4 @@ Check whether DrRacket is installed and prompt installation if needed.
 
 ## Command Execution
 
-Only certain relative paths are whitelisted for automatic execution. Always use relative paths (e.g., `./scripts/setup.sh`, `racket -l sicp work/...`) rather than absolute paths to avoid unnecessary permission prompts. Never expand relative paths to absolute ones when running commands.
+Only certain relative paths are whitelisted for automatic execution. Always use relative paths (e.g., `./scripts/setup.sh`, `racket work/...`) rather than absolute paths to avoid unnecessary permission prompts. Never expand relative paths to absolute ones when running commands.

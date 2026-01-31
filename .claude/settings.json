@@ -1,15 +1,17 @@
 {
   "permissions": {
     "defaultMode": "dontAsk",
+    "ask": [
+      "Edit(.claude/**)",
+      "Write(.claude/**)"
+    ],
     "deny": [
-      "Edit(path:work/**)",
-      "Write(path:work/**)",
-      "Edit(path:book/**)",
-      "Write(path:book/**)",
-      "Edit(path:scripts/**)",
-      "Write(path:scripts/**)",
-      "Edit(path:.claude/**)",
-      "Write(path:.claude/**)",
+      "Edit(work/**)",
+      "Write(work/**)",
+      "Edit(book/**)",
+      "Write(book/**)",
+      "Edit(scripts/**)",
+      "Write(scripts/**)",
       "Bash(echo:*)",
       "Bash(rm -rf:*)",
       "Bash(rm -r:*)",
@@ -20,15 +22,14 @@
     ],
     "allow": [
       "Skill(sicp-tutor)",
-      "Edit(path:.tutor/**)",
-      "Write(path:.tutor/**)",
+      "Edit(.tutor/**)",
+      "Write(.tutor/**)",
       "Bash(racket:*)",
       "Bash(git -C .tutor add:*)",
       "Bash(git -C .tutor commit:*)",
       "Bash(git -C .tutor status:*)",
       "Bash(git -C .tutor log:*)",
       "Bash(git -C .tutor diff:*)",
-      "Bash(mkdir -p .tutor:*)",
       "Bash(rm:.setup-markers/tutor-verify-book)",
       "Bash(rm:.setup-markers/book-processed)",
       "Bash(rm:.setup-markers/mit-fetched)",
