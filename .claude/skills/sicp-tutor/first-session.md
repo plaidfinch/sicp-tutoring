@@ -76,6 +76,12 @@ prompt: |
   - .tutor/knowledge/preferences.md: Replace placeholder with student identity and observations
   - .tutor/knowledge/progress.json: Set last_session to today's date, total_sessions to 1
 
+  IMPORTANT — Git commands:
+  - Use RELATIVE paths: `git -C .tutor add -A` and `git -C .tutor commit -m "..."`
+  - Do NOT use absolute paths — they will be denied by the permission system.
+  - Do NOT use `cd` — use `git -C .tutor` from the working directory.
+  - The .tutor/ repo is already initialized; just add and commit.
+
   Commit message: "First session: met [name]"
 ```
 

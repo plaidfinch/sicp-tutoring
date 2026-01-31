@@ -93,34 +93,9 @@ else
     echo "✓ Book processed to markdown"
 fi
 
-# Fetch problem sets and code from MIT (not in sarabander repo)
-MIT_MARKER="$PROJECT_DIR/.setup-markers/mit-fetched"
-if [ -f "$MIT_MARKER" ] && ! $REPAIR_MODE; then
-    echo "✓ Problem sets and code present"
-elif [ -d "$PROJECT_DIR/book/psets" ] && [ -d "$PROJECT_DIR/book/code" ]; then
-    # Content exists but marker doesn't—fix the marker
-    mkdir -p "$PROJECT_DIR/.setup-markers"
-    touch "$MIT_MARKER"
-    echo "✓ Problem sets and code present"
-else
-    echo "Fetching problem sets and code from MIT..."
-    mkdir -p "$PROJECT_DIR/book"
-    curl -sL -o /tmp/sicp.zip \
-        "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip"
-    # Extract only psets and code directories
-    unzip -o -q /tmp/sicp.zip "psets/*" "code/*" -d "$PROJECT_DIR/book/" 2>/dev/null || true
-    rm /tmp/sicp.zip
-    # Extract the .scm source files
-    if [ -f "$PROJECT_DIR/book/code/allcode.zip" ]; then
-        mkdir -p "$PROJECT_DIR/book/code/extracted"
-        unzip -o -q "$PROJECT_DIR/book/code/allcode.zip" -d "$PROJECT_DIR/book/code/extracted/"
-    fi
-    mkdir -p "$PROJECT_DIR/.setup-markers"
-    touch "$MIT_MARKER"
-    echo "✓ Problem sets and code fetched"
-fi
-
 # Initialize tutor workspace (.tutor/)
+# This must happen before the MIT fetch — the fetch can hang/fail,
+# and the workspaces are critical for the tutor to function.
 TUTOR_MARKER="$PROJECT_DIR/.setup-markers/tutor-workspace"
 if [ -f "$TUTOR_MARKER" ] && ! $REPAIR_MODE; then
     echo "✓ .tutor/ git initialized"
@@ -211,6 +186,38 @@ else
     mkdir -p "$PROJECT_DIR/.setup-markers"
     touch "$WORK_MARKER"
     echo "✓ work/ git initialized"
+fi
+
+# Fetch problem sets and code from MIT (not in sarabander repo)
+# This is last because the MIT server can be slow/unreliable,
+# and everything above is sufficient to start tutoring.
+MIT_MARKER="$PROJECT_DIR/.setup-markers/mit-fetched"
+if [ -f "$MIT_MARKER" ] && ! $REPAIR_MODE; then
+    echo "✓ Problem sets and code present"
+elif [ -d "$PROJECT_DIR/book/psets" ] && [ -d "$PROJECT_DIR/book/code" ]; then
+    # Content exists but marker doesn't—fix the marker
+    mkdir -p "$PROJECT_DIR/.setup-markers"
+    touch "$MIT_MARKER"
+    echo "✓ Problem sets and code present"
+else
+    echo "Fetching problem sets and code from MIT..."
+    mkdir -p "$PROJECT_DIR/book"
+    if curl -sL --max-time 60 -o /tmp/sicp.zip \
+        "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip"; then
+        # Extract only psets and code directories
+        unzip -o -q /tmp/sicp.zip "psets/*" "code/*" -d "$PROJECT_DIR/book/" 2>/dev/null || true
+        rm -f /tmp/sicp.zip
+        # Extract the .scm source files
+        if [ -f "$PROJECT_DIR/book/code/allcode.zip" ]; then
+            mkdir -p "$PROJECT_DIR/book/code/extracted"
+            unzip -o -q "$PROJECT_DIR/book/code/allcode.zip" -d "$PROJECT_DIR/book/code/extracted/"
+        fi
+        mkdir -p "$PROJECT_DIR/.setup-markers"
+        touch "$MIT_MARKER"
+        echo "✓ Problem sets and code fetched"
+    else
+        echo "⚠ MIT fetch timed out (problem sets unavailable, not critical)"
+    fi
 fi
 
 echo ""
