@@ -1,3 +1,35 @@
 #!/bin/bash
 cd "$(dirname "$0")"
+
+# Check if claude is installed
+if ! command -v claude &> /dev/null; then
+    echo "Claude Code CLI is not installed."
+    echo ""
+
+    # Check if npm is available
+    if command -v npm &> /dev/null; then
+        read -p "Install via npm? [Y/n] " response
+        response=${response:-Y}
+        if [[ "$response" =~ ^[Yy]$ ]]; then
+            echo "Installing Claude Code..."
+            npm install -g @anthropic-ai/claude-code
+            if [ $? -ne 0 ]; then
+                echo "Installation failed. You may need to run with sudo:"
+                echo "  sudo npm install -g @anthropic-ai/claude-code"
+                exit 1
+            fi
+        else
+            echo "Please install Claude Code manually:"
+            echo "  npm install -g @anthropic-ai/claude-code"
+            exit 1
+        fi
+    else
+        echo "npm is not installed. Please install Node.js first, then run:"
+        echo "  npm install -g @anthropic-ai/claude-code"
+        echo ""
+        echo "Or visit: https://docs.anthropic.com/en/docs/claude-code"
+        exit 1
+    fi
+fi
+
 claude "λ"

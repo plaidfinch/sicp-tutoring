@@ -24,9 +24,16 @@ MISSING_DEPS=()
 
 command -v git &>/dev/null || MISSING_DEPS+=("git")
 command -v pandoc &>/dev/null || MISSING_DEPS+=("pandoc")
-command -v racket &>/dev/null || MISSING_DEPS+=("racket")
 command -v curl &>/dev/null || MISSING_DEPS+=("curl")
 command -v unzip &>/dev/null || MISSING_DEPS+=("unzip")
+
+# Check for Racket with DrRacket (full installation, not minimal)
+if ! command -v racket &>/dev/null; then
+    MISSING_DEPS+=("racket (full installation with DrRacket)")
+elif ! command -v drracket &>/dev/null && [ ! -d "/Applications/DrRacket.app" ]; then
+    # Has racket but not DrRacket - likely minimal installation
+    MISSING_DEPS+=("drracket (need full Racket installation, not minimal)")
+fi
 
 if [ ${#MISSING_DEPS[@]} -gt 0 ]; then
     echo "MISSING_DEPENDENCIES: ${MISSING_DEPS[*]}"

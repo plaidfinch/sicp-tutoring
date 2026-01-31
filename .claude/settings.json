@@ -3,15 +3,15 @@
     "defaultMode": "dontAsk",
     "ask": [
       "Edit(.claude/**)",
-      "Write(.claude/**)"
+      "Write(.claude/**)",
+      "Edit(scripts/**)",
+      "Write(scripts/**)"
     ],
     "deny": [
       "Edit(work/**)",
       "Write(work/**)",
       "Edit(book/**)",
       "Write(book/**)",
-      "Edit(scripts/**)",
-      "Write(scripts/**)",
       "Bash(echo:*)",
       "Bash(rm -rf:*)",
       "Bash(rm -r:*)",

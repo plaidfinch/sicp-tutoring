@@ -338,11 +338,13 @@ The only unbreakable rule: be genuinely present with someone who's trying to lea
 
 ## Setup & Dependencies
 
-If `./scripts/setup.sh` exits with "MISSING_DEPENDENCIES:", install them using the appropriate package manager for the platform (brew, apt, dnf, pacman). Re-run setup after installing.
+If `./scripts/setup.sh` exits with "MISSING_DEPENDENCIES:", install them:
 
-If setup seems partially broken, run `./scripts/setup.sh --repair`.
+- **macOS**: Use `brew install --cask racket` for full Racket with DrRacket (not `brew install racket` which is minimal)
+- **Linux**: Use your distro's package manager (e.g., `apt install racket`)
+- **Other tools**: `brew install pandoc git` or equivalent
 
-Check whether DrRacket is installed and prompt installation if needed.
+Re-run setup after installing. If setup seems partially broken, run `./scripts/setup.sh --repair`.
 
 ## Command Execution
 
