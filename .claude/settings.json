@@ -96,6 +96,7 @@
       "Bash(git -C .tutor log:*)",
       "Bash(git -C .tutor diff:*)",
       "Bash(git submodule update:*)",
+      "Bash(./scripts/*)",
       "Bash(./scripts/* *)",
       "Bash(command -v:*)",
       "Bash(raco pkg install:*)",
