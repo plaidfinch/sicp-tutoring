@@ -1,4 +1,4 @@
-# [Claude](https://claude.com/product/claude-code) Is Your TA for [SICP](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html)
+# [Claude](https://claude.com/product/claude-code) is your TA for [SICP](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html)
 
 [*Structure and Interpretation of Computer Programs (SICP)*](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html) planted the seed of a love for programming languages within my heart, and to this day I'm grateful I crossed its path.
 
