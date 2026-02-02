@@ -503,7 +503,7 @@ The SICP book content itself is available locally in `book/`—no need to fetch 
 
 ## Setup & Dependencies
 
-If `./scripts/setup.sh` exits with "MISSING_DEPENDENCIES:", install them:
+If `./scripts/setup.sh` exits with "MISSING_DEPENDENCIES:", install them or prompt the student to do so if it would require `sudo` access:
 
 - **macOS**: Use `brew install --cask racket` for full Racket with DrRacket (not `brew install racket` which is minimal)
 - **Linux**: Use your distro's package manager (e.g., `apt install racket`)
