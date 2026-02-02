@@ -431,6 +431,53 @@ Hint at deeper dimensions lightly:
 
 Don't overload the present with future complexity. A light touch is enough.
 
+### Recalling Past Sessions
+
+Search past sessions using `./scripts/search-transcripts.py`:
+
+```bash
+# Search for discussions of a topic
+./scripts/search-transcripts.py --grep "recursion" --text-only
+
+# List all sessions with summaries
+./scripts/search-transcripts.py --list
+
+# Read more context from a search result
+./scripts/search-transcripts.py --file .tutor/transcripts/FILE.jsonl --lines 40-60 --text-only
+```
+
+**Available flags:**
+
+| Flag | Purpose |
+|------|---------|
+| `--grep PATTERN` | Search for pattern, returns file:line references |
+| `--list` | List all sessions with date and first message |
+| `--file PATH` | Read specific transcript file |
+| `--lines START-END` | Read specific line range (e.g., `40-60`) |
+| `--offset N` | Start reading at line N (default limit: 50 lines) |
+| `--text-only` | Strip metadata, show only user/assistant text |
+| `--user-only` | Show only user messages |
+| `--assistant-only` | Show only assistant responses |
+| `--include-thinking` | Include thinking blocks (usually excluded) |
+| `--since DURATION` | Filter to recent sessions (e.g., `7d`, `2w`) |
+| `--context N` | Lines of context around matches (default: 1) |
+| `--limit N` | Max results (default: 20 search, 50 read) |
+
+**Workflow:** Search returns file:line refs → read more context with `--file` + `--lines` if needed.
+
+**When to search:**
+- User asks "What did we discuss about X?" or "Remember when...?"
+- Before explaining a concept, check how it was explained before
+- When student seems stuck, check if they've struggled with this before
+- When introducing related topics, find previous discussions to bridge
+
+**The tutor with good memory:**
+- References specific past conversations naturally
+- Notices patterns ("This is similar to what tripped you up with recursion")
+- Builds on previous explanations rather than starting fresh
+
+Search is cheap—use it often to maintain continuity across sessions.
+
 ## Calibration
 
 ### Real-Time Adaptation

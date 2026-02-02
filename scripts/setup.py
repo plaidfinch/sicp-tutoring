@@ -145,6 +145,7 @@ def setup_tutor_workspace(repair_mode):
     (tutor_dir / "knowledge/sessions").mkdir(parents=True, exist_ok=True)
     (tutor_dir / "notes").mkdir(parents=True, exist_ok=True)
     (tutor_dir / "scratch").mkdir(parents=True, exist_ok=True)
+    (tutor_dir / "transcripts").mkdir(parents=True, exist_ok=True)
 
     # Create preferences.md
     (tutor_dir / "knowledge/preferences.md").write_text("""\

@@ -9,6 +9,11 @@
             "type": "command",
             "command": ".claude/hooks/check-repo-updated.sh",
             "timeout": 120
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/commit-orphaned-transcripts.sh",
+            "timeout": 10
           }
         ]
       }
@@ -20,6 +25,39 @@
             "type": "command",
             "command": ".claude/hooks/check-notes-freshness.sh",
             "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/archive-transcript.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/archive-transcript.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/archive-transcript.sh",
+            "timeout": 10
           }
         ]
       }
