@@ -385,12 +385,6 @@ prompt: |
   - .tutor/knowledge/preferences.md (if new preferences observed)
   - .tutor/knowledge/struggles.md (if recurring patterns noticed)
 
-  IMPORTANT — Git commands:
-  - Use RELATIVE paths: `git -C .tutor add -A` and `git -C .tutor commit -m "..."`
-  - Do NOT use absolute paths — they will be denied by the permission system.
-  - Do NOT use `cd` — use `git -C .tutor` from the working directory.
-  - The .tutor/ repo is already initialized; just add and commit.
-
   Commit message: "Session notes: [brief description]"
 ```
 
