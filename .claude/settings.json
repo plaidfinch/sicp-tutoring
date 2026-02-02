@@ -95,7 +95,6 @@
       "Bash(git -C .tutor status:*)",
       "Bash(git -C .tutor log:*)",
       "Bash(git -C .tutor diff:*)",
-      "Bash(rm .setup-markers/*)",
       "Bash(git submodule update:*)",
       "Bash(./scripts/* *)",
       "Bash(command -v:*)",

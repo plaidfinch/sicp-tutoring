@@ -20,7 +20,7 @@ The session startup already greeted them and explained setup is happening. Now v
 3. **Spot-check content** using Read on a portion of Chapter 1 markdown to confirm it's the actual SICP text.
 
 4. **If everything looks good:**
-   - Delete the marker: `rm .setup-markers/tutor-verify-book` (whitelisted)
+   - Clear the marker: `./scripts/clear-marker.sh tutor-verify-book`
    - Proceed to the welcome interview
 
 5. **If something is wrong:**
