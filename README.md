@@ -12,7 +12,8 @@ This project is an experiment to see what it takes to turn an always-available c
 This repository teaches [Claude Code](https://claude.com/product/claude-code) how to be an effective teaching assistant for SICP, based on my own experience as a TA for the course.
 Because the Claude Code environment runs on the student's machine, it can read their work, run their programs, and even write its own programs in a private workspace to prepare examples and test scenarios.
 The tutor is also equipped with a note-taking system that allows it to continuously learn about the student and their learning style, keeping track of struggles, insights, and patterns.
-In a sense, this is an experiment to see if the time is ripe for Neal Stephenson's [Young Lady's Illustrated Primer](https://www.goodreads.com/book/show/827.The_Diamond_Age), at least writ small.
+
+In a sense, this is an exploration to see if the time is ripe for Neal Stephenson's [Young Lady's Illustrated Primer](https://www.goodreads.com/book/show/827.The_Diamond_Age), at least writ small.
 
 ## Quick Start
 
