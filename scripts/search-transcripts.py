@@ -110,9 +110,18 @@ def extract_thinking_content(entry):
     return None
 
 
+def is_meta_message(entry):
+    """Check if entry is a meta/injected message (skill prompts, system context)."""
+    return entry.get('isMeta', False)
+
+
 def should_include_entry(entry, args):
     """Check if entry should be included based on filters."""
     entry_type = entry.get('type')
+
+    # Filter meta messages (skill prompts) unless explicitly requested
+    if not args.include_meta and is_meta_message(entry):
+        return False
 
     if args.user_only and entry_type != 'user':
         return False
@@ -257,7 +266,7 @@ def list_sessions(args):
         return
 
     for filepath in sorted(TRANSCRIPT_DIR.glob("*.jsonl"), reverse=True):
-        # Get first user message as summary
+        # Get first real user message as summary (skip meta/skill prompts)
         summary = None
         with open(filepath, 'r') as f:
             for line in f:
@@ -266,7 +275,7 @@ def list_sessions(args):
                     continue
                 try:
                     entry = json.loads(line)
-                    if entry.get('type') == 'user':
+                    if entry.get('type') == 'user' and not is_meta_message(entry):
                         text = extract_text_content(entry)
                         if text:
                             summary = text[:100] + "..." if len(text) > 100 else text
@@ -299,6 +308,8 @@ def main():
                         help="Show only assistant responses")
     parser.add_argument('--include-thinking', action='store_true',
                         help="Include thinking blocks (usually excluded)")
+    parser.add_argument('--include-meta', action='store_true',
+                        help="Include meta messages (skill prompts, injected context)")
 
     # Search mode
     parser.add_argument('--grep', metavar='PATTERN',
