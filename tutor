@@ -24,4 +24,11 @@ if ! command -v claude &> /dev/null; then
     fi
 fi
 
-claude "λ"
+# Detect first session vs returning student
+# Check total_sessions in progress.json (0 = new student)
+progress_file=".tutor/knowledge/progress.json"
+if [ -f "$progress_file" ] && grep -q '"total_sessions": 0' "$progress_file"; then
+    claude "λ?"  # New student
+else
+    claude "λ"   # Returning student
+fi

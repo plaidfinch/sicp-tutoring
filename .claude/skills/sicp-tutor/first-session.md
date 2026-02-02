@@ -1,6 +1,6 @@
 # First Session Protocol
 
-> Read this file only when `.tutor/knowledge/preferences.md` contains placeholder text.
+> Read this file when the launcher sends `λ?` (new student signal).
 
 ## 1. Verify Book Installation (if needed)
 
